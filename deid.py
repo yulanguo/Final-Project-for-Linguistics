@@ -1,6 +1,3 @@
-
-
-
 import os
 from docx import Document
 from fuzzywuzzy import fuzz
@@ -18,41 +15,6 @@ def deidentify_names_in_directory(directory_path, name_dict):
             deidentify_names(file_path, name_dict, output_directory)
 
 def deidentify_names(doc_path, name_dict, output_directory):
-    # document = Document(doc_path)
-    
-    # for paragraph in document.paragraphs:
-    #     doc = nlp(paragraph.text)
-    #     flagged_entities = set()  # To store the flagged entities
-        
-    #     for name, pseudonym in name_dict.items():
-    #         name_tokens = nlp(name)
-
-    #         #tokenize by word
-    #         # then iterate through and do combinations of words to check
-    #         # keep track of fuzzy scores
-    #         # change all that are high enough
-            
-    #         for i in range(len(doc) - len(name_tokens) + 1):
-    #             phrase_tokens = doc[i:i+len(name_tokens)]
-    #             phrase_text = ' '.join([t.text for t in phrase_tokens])
-                
-    #             if fuzz.partial_ratio(phrase_text.lower(), name.lower()) >= 70:
-    #                 paragraph.text = paragraph.text.replace(phrase_text, ' ' + pseudonym)
-    #                 flagged_entities.add(phrase_text)
-        
-    #     for ent in doc.ents:
-    #         if ent.label_ in ['PERSON', 'ORG', 'LOC']:
-    #             ent_text = ent.text
-    #             if ent_text not in flagged_entities:
-    #                 paragraph.text = paragraph.text.replace(ent_text, f'[{ent_text}]')
-    #                 print('Potential name:', ent_text)
-    #                 flagged_entities.add(ent_text)
-
-    # modified_filename = os.path.basename(doc_path).replace('.docx', '_deidentified.docx')
-    # modified_doc_path = os.path.join(output_directory, modified_filename)
-    # document.save(modified_doc_path)
-    # print('Deidentification complete. Modified document saved as:', modified_doc_path)
-
     document = Document(doc_path)
     matcher = PhraseMatcher(nlp.vocab)
     # patterns = [nlp(name) for name in name_dict.keys()]
